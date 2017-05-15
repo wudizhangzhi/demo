@@ -7,7 +7,10 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'demon.views.home', name='home'),
     # url(r'^demon/', include('demon.foo.urls')),
-    url(r'^bilibili/', include('bilibili.urls')),
+    url(r'^bilibili/', include('bilibili.urls', namespace='bilibili')),
+    url(r'^accounts/', include('accounts.urls', namespace='accounts')),
+
+    url(r'^api/', include('api.urls', namespace='api')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
