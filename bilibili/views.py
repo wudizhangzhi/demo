@@ -48,14 +48,11 @@ class BiLiVideoView(LoginRequiredMixin, TemplateView):
         return context_data
 
 
-class BiliVideoCharts(TemplateView):
-    template_name = 'bilibili/charts.html'
-
-
 class BiliDashboard(LoginRequiredMixin, TemplateView):
     template_name = 'bilibili/dashboard.html'
     def get_context_data(self, *args, **kwargs):
         context_data = super(BiliDashboard, self).get_context_data(*args, **kwargs)
+
         today = datetime.date.today()
         # 视频数量
         video_total = BiliVideo.objects.all().count()
@@ -86,9 +83,10 @@ class BiliVideoDetail(LoginRequiredMixin, TemplateView):
         # start_date = today - datetime.timedelta(days=7)
         # BiliVideoData.objects.filter(pk=av_id)
         taglist = BiliTag.objects.filter(video__pk=av_id).all()
-
+        video = get_object_or_404(BiliVideo, pk=av_id)
         context_data['av_id'] = av_id
         context_data['taglist'] = taglist
+        context_data['video'] = video
         return context_data
 
 
