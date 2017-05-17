@@ -90,6 +90,48 @@ class BiliVideoDetail(LoginRequiredMixin, TemplateView):
         return context_data
 
 
+class BiliUperView(LoginRequiredMixin, TemplateView):
+    template_name = 'bilibili/uper.html'
+    def get(self, request, *args, **kwargs):
+        return super(BiliUperView, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context_data = super(BiliUperView, self).get_context_data(**kwargs)
+        pk = kwargs.get('pk', '')
+        uper = get_object_or_404(BiliUper, pk=pk)
+        context_data['uper'] = uper
+        return context_data
+
+
+class BiLiUperListView(LoginRequiredMixin, TemplateView):
+    # 哔哩哔哩视频页面
+    model = BiliUper
+    template_name = 'bilibili/uperlist.html'
+    # def get(self, request, *args, **kwargs):
+    #     return super(BiLiVideoView, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context_data = super(BiLiUperListView, self).get_context_data(**kwargs)
+        page = int(self.request.GET.get('page', 1))
+        pagesize = int(self.request.GET.get('pagesize', 20))
+        # videolist = BiliVideo.objects.all()[page:pagesize]
+        paginator = Paginator(BiliVideo.objects.all().order_by('-addtime'), pagesize)
+        try:
+            videolist = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            videolist = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            videolist = paginator.page(paginator.num_pages)
+        page_total = paginator.num_pages
+        startpagenum = (page - 6 < 1) and 1 or (page - 6)
+        endpagenum = (startpagenum + 9 > page_total) and page_total or startpagenum + 9
+        context_data['videolist'] = videolist
+        context_data['pagelist'] = [i for i in xrange(startpagenum, endpagenum + 1)]
+        context_data['page_cur'] = page
+        context_data['pagesize'] = pagesize
+        return context_data
 
 
 class TestView(TemplateView):
