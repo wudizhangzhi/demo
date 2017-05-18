@@ -66,7 +66,7 @@ class BiliUper(models.Model):
         return self.name
 
 class BiliUperData(models.Model):
-    uper = models.ForeignKey(BiliUper, to_field='uid', related_name='upderdata')
+    uper = models.ForeignKey(BiliUper, to_field='uid', related_name='uperdata')
     videonum = models.IntegerField(null=True, default=0)
     gz = models.IntegerField(null=True, default=0) # 关注数
     fans = models.IntegerField(null=True, default=0)
