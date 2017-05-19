@@ -1,6 +1,7 @@
 # -*- coding:utf8 -*-
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
+import datetime
 
 # Create your models here.
 
@@ -44,6 +45,19 @@ class BiliVideo(models.Model):
     def __unicode__(self):
         return self.title
 
+    def get_view_rate(self):
+        try:
+            data_now = self.videodata.all().order_by('-pk')[0]
+            data_last = self.videodata.all().order_by('-pk')[1]
+            delta_view = (data_now.view - data_last.view)
+            delta_time = float((data_now.createtime - \
+            data_last.createtime).total_seconds() / datetime.timedelta(days=1).total_seconds())
+            rate = round(delta_view / delta_time, 2)
+            return rate
+        except:
+            return None
+
+
 class BiliVideoData(models.Model):
     video = models.ForeignKey(BiliVideo, to_field='aid', related_name='videodata')
     view = models.IntegerField(null=True, verbose_name=_("view num")) # 总播放数量
@@ -53,6 +67,7 @@ class BiliVideoData(models.Model):
     coin = models.IntegerField(null=True) # 硬币
     share = models.IntegerField(null=True) # 分享
     createtime = models.DateTimeField(null=False, auto_now=True)
+
 
 class BiliUper(models.Model):
     name = models.CharField(max_length=255)
@@ -65,6 +80,18 @@ class BiliUper(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_fans_rate(self):
+        try:
+            data_now = self.uperdata.all().order_by('-pk')[0]
+            data_last = self.uperdata.all().order_by('-pk')[1]
+            delta_fans = (data_now.fans - data_last.fans)
+            delta_time = float((data_now.createtime - \
+            data_last.createtime).total_seconds() / datetime.timedelta(days=1).total_seconds())
+            rate = round(delta_fans / delta_time, 2)
+            return rate
+        except:
+            return None
+
 class BiliUperData(models.Model):
     uper = models.ForeignKey(BiliUper, to_field='uid', related_name='uperdata')
     videonum = models.IntegerField(null=True, default=0)
@@ -72,3 +99,4 @@ class BiliUperData(models.Model):
     fans = models.IntegerField(null=True, default=0)
     play = models.IntegerField(null=True, default=0) # 播放数量
     createtime = models.DateTimeField(null=False, auto_now=True)
+    fans_rate = models.DecimalField(max_digits=20 , decimal_places=2, default=0)
