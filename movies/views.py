@@ -14,3 +14,13 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         return super(IndexView, self).get_context_data(**kwargs)
+
+
+class PlayView(TemplateView):
+    template_name = 'movies/play.html'
+
+    def get_context_data(self, **kwargs):
+        v = self.request.GET.get('v', '')
+        context = super(PlayView, self).get_context_data(**kwargs)
+        context['v'] = v
+        return context

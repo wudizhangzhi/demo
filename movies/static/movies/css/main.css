@@ -1,2 +1,74 @@
+.mr1 {
+    margin-right: 20px!important
+}
 
 
+.yk-col4 {
+    width: 200px
+}
+
+
+.yk-col4 {
+    float: left;
+    min-height: 1px;
+    display: inline;
+    margin-right: 20px
+}
+
+.box-series {
+    width: 1080px;
+    overflow: hidden;
+    zoom: 1;
+}
+
+.box-series .panel {
+    width: 1120px;
+    overflow: hidden;
+    zoom:1
+}
+
+.yk-pack {
+    position: relative;
+    background-color: #FFF;
+}
+
+.yk-pack .p-thumb {
+    position: relative;
+    overflow: hidden;
+    zoom: 1;
+    line-height: 18px;
+}
+
+.yk-pack .p-thumb a {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    left: 0;
+    top: 0;
+    text-decoration: none;
+    color: #FFF;
+}
+
+.pack-film .p-thumb img {
+    width: 200px;
+    height: 300px;
+    overflow: hidden;
+}
+
+.pack-film .pos-bottom {
+    height: 20px;
+    bottom: none;
+    top: 268px;
+}
+
+.yk-pack .pos-bottom {
+    position: absolute;
+    bottom: 6px;
+}
+
+.yk-pack .p-info {
+    width: 180px;
+    margin: 0 10px;
+    color: #DEDEDE;
+}
