@@ -28,6 +28,7 @@ class JsonWithEncodingPipeline(object):
     def process_item(self, item, spider):
         items = OrderedDict(item)
         self.save_item(items)
+        print('saved: %d' % len(items))
         # self.file.write(line)
         return item
 
