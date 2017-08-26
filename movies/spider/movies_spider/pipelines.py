@@ -27,7 +27,7 @@ class JsonWithEncodingPipeline(object):
 
     def process_item(self, item, spider):
         items = OrderedDict(item)
-
+        self.save_item(items)
         # self.file.write(line)
         return item
 
@@ -35,7 +35,7 @@ class JsonWithEncodingPipeline(object):
         # self.file.close()
         pass
 
-    @staticmethod
+    @classmethod
     def save_item(cls, items):
         url_list = items['url']
         bg_img_url_list = items['bg_img_url']
