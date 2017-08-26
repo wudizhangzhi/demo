@@ -64,7 +64,7 @@ class JsonWithEncodingPipeline(object):
                     if m.exists():
                         is_exists = True
                 else:
-                    m = Movies.objects.filter(source_id=source_id)
+                    m = Movies.objects.filter(title=title)
                     if m.exists():
                         is_exists = True
 
@@ -76,6 +76,7 @@ class JsonWithEncodingPipeline(object):
                 m.title = title
                 m.url = url
                 m.bg_img_url = bg_img_url_list[i]
+                m.source_id = source_id
                 m.update_at = datetime.datetime.now()
 
                 if is_exists:
