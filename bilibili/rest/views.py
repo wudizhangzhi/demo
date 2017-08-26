@@ -1,7 +1,7 @@
 # -*- coding:utf8 -*-
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import action, detail_route, list_route
+from rest_framework.decorators import detail_route, list_route
 from rest_framework.response import Response
 from rest_framework import serializers
 from django.db.models import Count, Max
@@ -16,7 +16,7 @@ class BiliVideoDetailViewSet(viewsets.ViewSet):
     def list(self, request):
         return Response({'status':1})
 
-    @action(methods=['GET'])
+    @detail_route(methods=['GET'])
     def recent_week(self, request, pk=None):
         today = datetime.date.today()
         start_date = today - datetime.timedelta(days=7)
@@ -44,7 +44,7 @@ class BiliUperlViewSet(viewsets.ViewSet):
     def list(self, request):
         return Response({'status':1})
 
-    @action(methods=['GET'])
+    @detail_route(methods=['GET'])
     def recent_week(self, request, pk=None):
         today = datetime.date.today()
         start_date = today - datetime.timedelta(days=7)

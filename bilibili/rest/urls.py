@@ -1,15 +1,14 @@
 # -*- coding:utf8 -*-
-from django.conf.urls import patterns, url, include
+from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
 from .views import (BiliVideoDetailViewSet, BiliUperlViewSet, BiliDatalViewSet)
 
 router = DefaultRouter()
-router.register(r'video', BiliVideoDetailViewSet)
-router.register(r'uper', BiliUperlViewSet)
-router.register(r'data', BiliDatalViewSet)
+router.register(r'video', BiliVideoDetailViewSet, base_name='video')
+router.register(r'uper', BiliUperlViewSet, base_name='uper')
+router.register(r'data', BiliDatalViewSet, base_name='data')
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     # video api
     url(r'', include(router.urls)),
-    )
+]

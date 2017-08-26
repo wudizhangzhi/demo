@@ -1,9 +1,8 @@
 # -*- coding:utf8 -*-
-from django.conf.urls import patterns, url, include
+from django.conf.urls import url, include
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     # bilibili api
     url(r'^bilibili/', include('bilibili.rest.urls')),
-    )
+    ]

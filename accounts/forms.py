@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
 class LoginForm(forms.Form):
-    username = forms.CharField(max_length=100, label=_('用户名'), )
-    password = forms.CharField(max_length=20, widget=forms.PasswordInput, label=_('密码'), )
+    username = forms.CharField(max_length=100, label=_(u'用户名'), )
+    password = forms.CharField(max_length=20, widget=forms.PasswordInput, label=_(u'密码'), )
 
     def clean(self):
         username = self.cleaned_data.get('username')
@@ -15,7 +15,7 @@ class LoginForm(forms.Form):
         self.user = authenticate(username=username, password=password)
 
         if self.user is None:
-            msg = _('错误的用户名或者密码!')
+            msg = _(u'错误的用户名或者密码!')
 
             raise forms.ValidationError(msg)
 

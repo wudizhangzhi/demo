@@ -7,7 +7,7 @@ register = template.Library()
 
 # def indexnum(count, pagesize, page_cur):
 def indexnum(*args):
-    print args
+    print(args)
     # return count + pagesize * (page_cur - 1)
     return '1'
 
@@ -34,6 +34,7 @@ def truncatehanzi(value, arg):
         return value[slice(*bits)]
 
     except (ValueError, TypeError):
-        return value # Fail silently.
+        return value  # Fail silently.
+
 
 register.filter('truncatehanzi', truncatehanzi)

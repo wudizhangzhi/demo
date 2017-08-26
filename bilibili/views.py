@@ -1,15 +1,17 @@
 # -*- coding:utf8 -*-
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import action
+from rest_framework.decorators import list_route
 from rest_framework.response import Response
 
 from django.views.generic.base import TemplateView
 from django.http import HttpResponse, Http404
 from django.shortcuts import redirect, get_object_or_404, get_list_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from braces.views import LoginRequiredMixin, JSONResponseMixin, \
-    AjaxResponseMixin
+# from braces.views import LoginRequiredMixin, JSONResponseMixin, \
+#     AjaxResponseMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 from .models import *
 
