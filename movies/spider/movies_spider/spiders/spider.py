@@ -37,8 +37,8 @@ class youku_Spider(CommonSpider):
     }
 
     def parse_1(self, response):
-        info('Parse ' + response.url)
+        # info('Parse ' + response.url)
         x = self.parse_with_rules(response, self.content_css_rules, dict)
-        print(json.dumps(x, ensure_ascii=False, indent=2))
+        # print(json.dumps(x, ensure_ascii=False, indent=2))
         return x
         # return self.parse_with_rules(response, self.css_rules, hacker_newsItem)
