@@ -25,7 +25,7 @@ class youku_Spider(CommonSpider):
         "http://list.youku.com/category/show/c_96.html",
     ]
     rules = [
-        Rule(sle(allow=("list.youku.com/category/show/c_96*")), callback='parse_1', follow=True),
+        Rule(sle(allow=("list.youku.com/category/show/c_9[67]_?[_sdp0-9]+\.html")), callback='parse_1', follow=True),
     ]
 
     content_css_rules = {
