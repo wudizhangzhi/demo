@@ -15,4 +15,4 @@ class MoviesViewSet(viewsets.ModelViewSet):
     pagination_class = PageNumberPagination
 
     def get_queryset(self):
-        return Movies.objects.all().order_by('-update_at')
+        return Movies.objects.all().order_by('update_at')
