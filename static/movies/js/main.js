@@ -3,21 +3,24 @@ $(function() {
     var page_cur = 1;
     var has_next_page = true;
 
-    var fetch_movies_list = function(page){
-    $.ajax({
-        url: '/api/movies/?page=' + page,
-        type: 'GET',
-        data: '',
-        success: function(data){
-            refresh_html(data.results);
-            if(data.next==null || data.next=='null'){
-                has_next_page = false;
-            }
-        },
-        error: function(data){
-            console.log('error')
-        },
-        });
+    var fetch_movies_list = function(page, search){
+        _url = '/api/movies/?page=' + page;
+        _search = search?'&search=' + search:'';
+        _url = _url + _search;
+        $.ajax({
+            url: _url ,
+            type: 'GET',
+            data: '',
+            success: function(data){
+                refresh_html(data.results);
+                if(data.next==null || data.next=='null'){
+                    has_next_page = false;
+                }
+            },
+            error: function(data){
+                console.log('error')
+            },
+            });
     };
 
     var refresh_html = function(items){
@@ -43,7 +46,10 @@ $(function() {
                 '</div>' +
             '</li>'
             $('#movies-list').append(html)
-        }
+        };
+        if(items.length==0){
+            $('#movies-list').append('<span>没有找到</span>')
+        };
 
     };
 
@@ -69,6 +75,13 @@ $(function() {
             alert('已经是第一页')
         };
 
+    });
+
+    $('#fa-search').on('click', function(){
+        page_cur = 1;
+        search_content = $('input[name="search"]').val();
+        console.log(search_content);
+        fetch_movies_list(page_cur, search_content);
     });
 
     fetch_page()

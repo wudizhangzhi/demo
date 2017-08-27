@@ -42,6 +42,7 @@ $(function() {
     };
 
 
+
     fetch_movies_list(1);
 
 })

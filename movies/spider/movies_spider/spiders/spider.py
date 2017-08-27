@@ -28,12 +28,18 @@ class youku_Spider(CommonSpider):
         Rule(sle(allow=("list.youku.com/category/show/c_9[67]_?[_sdp0-9]*\.html")), callback='parse_1', follow=True),
     ]
 
+    # 列表页面用
     content_css_rules = {
         'title': 'div.p-thumb a::attr(title)',
         'url': 'div.p-thumb a::attr(href)',
         'bg_img_url': 'div.p-thumb img::attr(src)',
         # 'images': '#Cnt-Main-Article-QQ img::attr(src)',
         # 'images-desc': '#Cnt-Main-Article-QQ div p+ p::text',
+    }
+
+    # 具体内容页面用
+    detail_css_rules = {
+        'category': ''
     }
 
     def parse_1(self, response):

@@ -15,4 +15,9 @@ class MoviesViewSet(viewsets.ModelViewSet):
     pagination_class = PageNumberPagination
 
     def get_queryset(self):
-        return Movies.objects.all().order_by('update_at')
+        seach = self.request.GET.get('search', '')
+        if seach:
+            queryset = Movies.objects.filter(title__startswith=seach).order_by('update_at')
+        else:
+            queryset = Movies.objects.all().order_by('update_at')
+        return queryset

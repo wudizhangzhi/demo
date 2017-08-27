@@ -8,11 +8,20 @@ class Movies(models.Model):
     SOURCE_TYPE = (
         (YOUKU, _('youku')),
     )
-    WHOLE = 0
-    TRAILER = 1
+    WHOLE = 0  # 正片
+    TRAILER = 1  # 预告
     FILM_TYPE = (
-        (WHOLE, _('whole film')),
-        (TRAILER, _('Trailer')),
+        (WHOLE, '正片'),
+        (TRAILER, '预告'),
+    )
+
+    MOVIE = 0  # 电影
+    TV = 1  # 电视剧
+    ZONGYI = 2  # 综艺
+    CATEGORY = (
+        (MOVIE, '电影'),
+        (TV, '电视剧'),
+        (ZONGYI, '综艺'),
     )
 
     title = models.CharField(max_length=255)
@@ -24,7 +33,9 @@ class Movies(models.Model):
     score = models.DecimalField(max_digits=4, decimal_places=1, blank=True, null=True)
     year = models.IntegerField(blank=True, null=True)  # 上映年份
     op_type = models.CharField(max_length=255, blank=True, null=True)  # 电影类型
-    film_type = models.IntegerField(choices=FILM_TYPE, default=WHOLE)
+    film_type = models.IntegerField(choices=FILM_TYPE, default=WHOLE)  # 是否正片等
+    category = models.IntegerField(choices=CATEGORY, default=MOVIE)  # 资源类型
+
     tags = models.ManyToManyField('movies.MovieTags')  #
     summary = models.TextField(blank=True, null=True)
     create_at = models.DateTimeField(auto_now=True)
