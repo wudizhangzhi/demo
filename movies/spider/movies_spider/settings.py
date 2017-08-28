@@ -68,6 +68,7 @@ DOWNLOADER_MIDDLEWARES = {
 ITEM_PIPELINES = {
    # 'movies_spider.pipelines.MoviesSpiderPipeline': 300,
    'movies_spider.pipelines.JsonWithEncodingPipeline': 300,
+   'movies_spider.pipelines.HandlerTvPipeline': 301,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

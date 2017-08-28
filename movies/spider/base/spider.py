@@ -58,6 +58,7 @@ class CommonSpider(CrawlSpider):
     # Extract content without any extra spaces.
     # NOTE: If content only has spaces, then it would be ignored.
     def extract_item(self, sels):
+        # TODO bug  [u'[\u52a8\u6f2b]']
         contents = []
         for i in sels:
             content = re.sub(r'\s+', ' ', i.extract())
@@ -126,8 +127,9 @@ class CommonSpider(CrawlSpider):
                     continue
                 if type(v) == list:
                     continue
+
                 self.deal_text(sel, item, force_1_item, k, v)
-                # import pdb;pdb.set_trace()
+
             else:
                 item[k] = []
                 for i in sel.css(k):

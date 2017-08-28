@@ -19,6 +19,10 @@ def debug(msg):
     log.debug(str(msg))
 
 
+def error(msg):
+    log.error(str(msg))
+
+
 import pprint
 
 
