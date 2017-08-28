@@ -18,10 +18,12 @@ class Movies(models.Model):
     MOVIE = 0  # 电影
     TV = 1  # 电视剧
     ZONGYI = 2  # 综艺
+    CARTOON = 3  # 卡通
     CATEGORY = (
-        (MOVIE, '电影'),
-        (TV, '电视剧'),
-        (ZONGYI, '综艺'),
+        (MOVIE, u'电影'),
+        (TV, u'剧集'),
+        (ZONGYI, u'综艺'),
+        (CARTOON, u'动漫'),
     )
 
     title = models.CharField(max_length=255)
@@ -45,6 +47,15 @@ class Movies(models.Model):
     source_key = models.CharField(max_length=255, blank=True, null=True)
     source_id = models.CharField(max_length=255, blank=True, null=True)
 
+    # video_id = models.CharField(max_length=255, blank=True, null=True)  # youku video_id
+
 
 class MovieTags(models.Model):
     name = models.CharField(max_length=255)
+
+
+class SubMovies(models.Model):
+    title = models.CharField(max_length=255)
+    url = models.TextField(blank=False)
+    seq = models.IntegerField(blank=True, null=True)
+    parent = models.ForeignKey('movies.Movies', related_name='subs')
