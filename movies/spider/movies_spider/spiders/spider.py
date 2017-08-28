@@ -28,7 +28,7 @@ class youku_Spider(CommonSpider):
     ]
     rules = [
         Rule(sle(allow=("list.youku.com/category/show/c_9[67]_?[_sdp0-9]*\.html")), callback='parse_1', follow=True),
-        Rule(sle(allow=("http://v.youku.com/v_show/id_[a-zA-z0-9]+.html.*?")), callback='parse_tv', follow=True),
+        Rule(sle(allow=("http://v.youku.com/v_show/id_[\s+]+.html.*?")), callback='parse_tv', follow=True),
     ]
 
     # 列表页面用
