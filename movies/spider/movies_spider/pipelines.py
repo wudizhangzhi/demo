@@ -110,19 +110,23 @@ class HandlerTvPipeline(object):
                 print('not in list', _category)
                 return item
             title = items['title'][0]
+            print('crawl %s' % title)
 
             sub_title_list = items['sub_title']
             seq_list = items['seq']
             url_list = items['url']
             seq_dict = dict([(seq, {'sub_title': sub_title, 'url': url}) for seq, sub_title, url in
                              zip(seq_list, sub_title_list, url_list)])
+            if not seq_dict:
+                print('not seq_dict')
+                return item
             seq_not_exist_set = seq_list
 
             # 判断类型, 是否保存过
             m = Movies.objects.filter(category=_category, title=title)
             if m.exists():
                 m = m[0]
-            else: # 创建
+            else:  # 创建
                 m = Movies()
                 m.title = title
                 m.category = _category

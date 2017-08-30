@@ -25,6 +25,7 @@ class youku_Spider(CommonSpider):
     start_urls = [
         "http://list.youku.com/category/show/c_96.html",
         "http://list.youku.com/category/show/c_100.html",
+        "http://list.youku.com/category/show/c_97.html",
     ]
     rules = [
         Rule(sle(allow=("list.youku.com/category/show/c_9[67]_?[_sdp0-9]*\.html")), callback='parse_1', follow=True),
@@ -44,9 +45,9 @@ class youku_Spider(CommonSpider):
     player_css_rules = {
         'category': 'h1.title a::text',
         'title': 'div.tvinfo h3::text',
-        'sub_title': 'div.textlists div.lists div.items li.item::attr(title)',
-        'seq': 'div.textlists div.lists div.items li.item::attr(seq)',
-        'url': 'div.textlists div.lists div.items li.item a::attr(href)',
+        'sub_title': '#vpofficiallistv5_wrap div.items .item::attr(title)',
+        'seq': '#vpofficiallistv5_wrap div.items .item::attr(seq)',
+        'url': '#vpofficiallistv5_wrap div.items .item a::attr(href)',
 
     }
 
