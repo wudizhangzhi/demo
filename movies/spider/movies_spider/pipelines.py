@@ -107,10 +107,15 @@ class HandlerTvPipeline(object):
             # self.save_sub_item(items)
             # =========
 
-            category = items['category'][0][1:-1]
+            category = items['category']
+            if not category:
+                logging.debug(items)
+                return items
+            else:
+                category = category[0]
             _category = self.category.get(category)
             if _category not in [Movies.TV, Movies.CARTOON]:
-                print('not in list', _category)
+                print('not in tv list', category)
                 return item
             title = items['title'][0]
             logging.info(u'TV: %r' % title)
@@ -162,10 +167,15 @@ class HandlerTvPipeline(object):
     @classmethod
     def save_sub_item(cls, items):
         try:
-            category = items['category'][0]
+            category = items['category']
+            if not category:
+                logging.debug(items)
+                return items
+            else:
+                category = category[0]
             _category = HandlerTvPipeline.category.get(category)
             if _category not in [Movies.TV, Movies.CARTOON]:
-                yield
+                return
             title = items['title'][0]
 
             sub_title_list = items['sub_title']
@@ -199,8 +209,9 @@ class HandlerTvPipeline(object):
                 sm.url = seq_dict[seq]['url']
                 sub_movies.append(sm)
 
+                logging.debug(seq_dict[seq]['sub_title'])
+
             SubMovies.objects.bulk_create(sub_movies)
-            print('saved %s' % len(sub_movies))
 
         except Exception, e:
             logging.error(e)
