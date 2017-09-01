@@ -112,7 +112,7 @@ class HandlerTvPipeline(object):
                 logging.debug(items)
                 return items
             else:
-                category = category[0]
+                category = category[0][1:-1]
             _category = self.category.get(category)
             if _category not in [Movies.TV, Movies.CARTOON]:
                 print('not in tv list', category)
