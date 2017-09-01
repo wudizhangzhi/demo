@@ -46,6 +46,7 @@ class JsonWithEncodingPipeline(object):
         for i in xrange(len(title_list)):
             try:
                 title = title_list[i]
+                logging.info(title)
                 if title in movies_saved:
                     continue
                 url = url_list[i]
@@ -110,7 +111,7 @@ class HandlerTvPipeline(object):
                 print('not in list', _category)
                 return item
             title = items['title'][0]
-            print('crawl %s' % title)
+            logging.info(title)
 
             sub_title_list = items['sub_title']
             seq_list = items['seq']
@@ -148,6 +149,8 @@ class HandlerTvPipeline(object):
                 sm.url = seq_dict[seq]['url']
                 sm.parent = m
                 sub_movies.append(sm)
+                
+                logging.debug(seq_dict[seq]['sub_title'])
 
             SubMovies.objects.bulk_create(sub_movies)
 
