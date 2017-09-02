@@ -34,7 +34,7 @@ class TvViewSet(viewsets.ModelViewSet):
         if not v:
             raise Http404
         else:
-            queryset = SubMovies.objects.filter(parent__id=v).order_by('seq')
+            queryset = SubMovies.objects.filter(parent__id=v).exclute(category=Movies.MOVIE).order_by('seq')
         return queryset
 
     # def list(self, request, *args, **kwargs):
