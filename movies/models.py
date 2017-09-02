@@ -27,7 +27,7 @@ class Movies(models.Model):
     )
 
     title = models.CharField(max_length=255)
-    url = models.TextField(blank=False)
+    url = models.TextField(blank=True, null=True)
     bg_img_url = models.TextField(blank=True, null=True)  # 电影海报
     director = models.CharField(max_length=255, blank=True, null=True)
     lead_actor = models.CharField(max_length=255, blank=True, null=True)

@@ -47,7 +47,7 @@ class JsonWithEncodingPipeline(object):
             try:
                 title = title_list[i]
                 if title in movies_saved:
-                    logging.debug(u'saved pass: %s' % title)
+                    logging.info(u'saved pass: %s' % title)
                     continue
                 url = url_list[i]
                 if url.startswith('//'):
@@ -80,10 +80,10 @@ class JsonWithEncodingPipeline(object):
                 m.update_at = datetime.datetime.now()
 
                 if is_exists:
-                    logging.debug(u'update %s' % title)
+                    logging.info(u'update %s' % title)
                     m.save()
                 else:
-                    logging.debug(u'save %s' % title)
+                    logging.info(u'save %s' % title)
                     movies_list.append(m)
                 movies_saved.append(title)
             except Exception as e:
@@ -106,17 +106,22 @@ class HandlerTvPipeline(object):
             items = OrderedDict(item)
             # self.save_sub_item(items)
             # =========
+            self.save_sub_item(items)
 
+        return item
+
+    def save_sub_item(self, items):
+        try:
             category = items['category']
             if not category:
-                logging.debug(items)
+                logging.info(items)
                 return items
             else:
                 category = category[0][1:-1]
             _category = self.category.get(category)
             if _category not in [Movies.TV, Movies.CARTOON]:
                 print('not in tv list', category)
-                return item
+                return items
             title = items['title'][0]
             logging.info(title)
 
@@ -126,26 +131,19 @@ class HandlerTvPipeline(object):
             seq_dict = dict([(seq, {'sub_title': sub_title, 'url': url}) for seq, sub_title, url in
                              zip(seq_list, sub_title_list, url_list)])
             if not seq_dict:
-                print('not seq_dict')
-                return item
-            seq_not_exist_set = seq_list
+                logging.info('not a seq dict')
+                return items
+            # seq_not_exist_set = seq_list
 
             # 判断类型, 是否保存过
-            m = Movies.objects.filter(category=_category, title=title)
-            if m.exists():
-                m = m[0]
-            else:  # 创建
-                m = Movies()
-                m.title = title
-                m.category = _category
-                m.save()
+            m, created = Movies.objects.get_or_create(category=_category, title=title)
+            logging.info((m, created))
+            seq_set = set(seq_list)
 
-                seq_set = set(seq_list)
-                seq_exist_list = SubMovies.objects.filter(parent__pk=m.id, seq__in=seq_set).values_list('seq',
-                                                                                                        flat=True)
-
-                seq_not_exist_set = seq_set.difference(seq_exist_list)
-                # TODO 更新
+            seq_exist_list = SubMovies.objects.filter(parent__pk=m.id, seq__in=seq_set).values_list('seq',
+                                                                                                    flat=True)
+            seq_not_exist_set = seq_set.difference([i for i in seq_exist_list])
+            # TODO 更新
 
             # 保存
             sub_movies = []
@@ -157,65 +155,14 @@ class HandlerTvPipeline(object):
                 sm.parent = m
                 sub_movies.append(sm)
 
-                logging.debug(u'save: %s' % seq_dict[seq]['sub_title'])
+            logging.info(','.join([i.title for i in sub_movies]))
 
             SubMovies.objects.bulk_create(sub_movies)
 
             # =========
-        return item
-
-    @classmethod
-    def save_sub_item(cls, items):
-        try:
-            category = items['category']
-            if not category:
-                logging.debug(items)
-                return items
-            else:
-                category = category[0]
-            _category = HandlerTvPipeline.category.get(category)
-            if _category not in [Movies.TV, Movies.CARTOON]:
-                return
-            title = items['title'][0]
-
-            sub_title_list = items['sub_title']
-            seq_list = items['seq']
-            url_list = items['url']
-            seq_dict = dict([(seq, {'sub_title': sub_title, 'url': url}) for seq, sub_title, url in
-                             zip(seq_list, sub_title_list, url_list)])
-            seq_not_exist_set = seq_list
-
-            # 判断类型, 是否保存过
-            m = Movies.objects.filter(category=_category, title=title)
-            if not m.exists():  # 创建
-                m = Movies()
-                m.title = title
-                m.category = category
-                m.save()
-
-                seq_set = set(seq_list)
-                seq_exist_list = SubMovies.objects.filter(parent__pk=m.id, seq__in=seq_set).values_list('seq',
-                                                                                                        flat=True)
-
-                seq_not_exist_set = seq_set.difference(seq_exist_list)
-                # TODO 更新
-
-            # 保存
-            sub_movies = []
-            for seq in seq_not_exist_set:
-                sm = SubMovies()
-                sm.seq = seq
-                sm.title = seq_dict[seq]['sub_title']
-                sm.url = seq_dict[seq]['url']
-                sub_movies.append(sm)
-
-                logging.debug(seq_dict[seq]['sub_title'])
-
-            SubMovies.objects.bulk_create(sub_movies)
 
         except Exception, e:
             logging.error(e)
-            print(e)
 
 
 class RedisPipeline(object):
