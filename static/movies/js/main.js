@@ -3,9 +3,9 @@ $(function() {
     var page_cur = 1;
     var has_next_page = true;
 
-    function search(v){
-        _url = '/api/movies/movies/?'
-        _search = search?'&search=' + search:'';
+    function search(param){
+        _url = '/api/movies/movies/'
+        _search = param?'?search=' + param:'';
         _url = _url + _search;
         $.ajax({
             url: _url ,
@@ -107,14 +107,16 @@ $(function() {
         page_cur = 1;
         search_content = $('input[name="search"]').val();
         console.log(search_content);
-        search(page_cur, search_content);
+        search(search_content);
     });
 
     $('#searchinput').on('keypress', function(){
-        page_cur = 1;
-        search_content = $('input[name="search"]').val();
-        console.log(search_content);
-        search(page_cur, search_content);
+        if(event.keyCode == "13"){
+            page_cur = 1;
+            search_content = $('input[name="search"]').val();
+            console.log(search_content);
+            search(search_content);
+        };
     });
 
     fetch_page()
