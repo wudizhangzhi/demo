@@ -2,10 +2,11 @@
 from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
 
-from movies.rest.views import (MoviesViewSet)
+from movies.rest.views import (MoviesViewSet, TvViewSet)
 
 router = DefaultRouter()
-router.register(r'', MoviesViewSet, base_name='movies')
+router.register(r'movies', MoviesViewSet, base_name='movies')
+router.register(r'tv', TvViewSet, base_name='tvs')
 
 urlpatterns = [
     # video api

@@ -49,9 +49,15 @@ class Movies(models.Model):
 
     # video_id = models.CharField(max_length=255, blank=True, null=True)  # youku video_id
 
+    def __unicode__(self):
+        return self.title
+
 
 class MovieTags(models.Model):
     name = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return self.name
 
 
 class SubMovies(models.Model):
@@ -59,3 +65,6 @@ class SubMovies(models.Model):
     url = models.TextField(blank=False)
     seq = models.IntegerField(blank=True, null=True)
     parent = models.ForeignKey('movies.Movies', related_name='subs')
+
+    def __unicode__(self):
+        return self.title

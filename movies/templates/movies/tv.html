@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% load mytags %}
+{% load static %}
+
+{% block title %}
+&hearts;月牙天冲爱你呦&hearts;
+{% endblock %}
+
+{% block body %}
+<div class="ad-w100">
+    <div class="input-group custom-search-form">
+        <input type="text" class="form-control" placeholder="搜索电影名称..." name="search" id="searchinput">
+        <span class="input-group-btn">
+                <button class="btn btn-default" type="button" id="fa-search">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+    </div>
+</div>
+
+<div class="box-series">
+    <ul class="panel" id="movies-list">
+        <li class="yk-col4 mr1">
+            <div class="yk-pack pack-film">
+                <div class="p-thumb"><a href="{{ tvinfo.url }}"
+                                        title="{{ tvinfo.title }}" target="_blank" data-spm-anchor-id="a2h1n.8251845.0.0"></a><i
+                        class="bg"></i><img class="quic" _src="{{ tvinfo.bg_img_url }}"
+                                            src="{% if tvinfo.bg_img_url %} {{ tvinfo.bg_img_url }} {% endif %}" alt="{{ tvinfo.title }}"></div>
+                <ul class="p-info pos-bottom">
+                    <li class="status hover-hide"><span class="p-time "><i class="ibg"></i><span>正片</span></span></li>
+                </ul>
+                <ul class="info-list">
+                    <li class="title"><a href="{{ tvinfo.url }}" title="{{ tvinfo.title }}"
+                                         target="_blank">{{ tvinfo.title }}</a>
+                    </li>
+                    <li class="actor"><em>主演：</em><a href=""
+                                                     target="_blank"
+                                                     title="{{ tvinfo.lead_actor }}">{{ tvinfo.lead_actor }}</a>
+                    </li>
+                    <li>2.4万次播放</li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+<div class="time_pic list">
+    <div class="time_con" style="display: block;">
+        <div class="swiper-container xfswiper1 swiper-container-horizontal">
+            <div class="swiper-wrapper mb20" id="seq-list">
+                <div class="swiper-slide swiper-slide-active" style="width: 636px;">
+                    <ul class="clear">
+                        <li><a href="http://www.dilidili.wang/watch3/55721/" target="_self"><em><span>第0话</span>我的英雄学院
+                            第二季 第0话 英雄笔记</em></a></li>
+                        <li><a href="http://www.dilidili.wang/watch3/55825/" target="_self"><em><span>第1话</span>我的英雄学院
+                            第二季 第1话 就是这么回事 御茶子同学</em></a></li>
+                    </ul>
+                </div>
+                <div class="swiper-slide swiper-slide-next" style="width: 636px;">
+                    <ul class="clear">
+                        <li><a href="http://www.dilidili.wang/watch3/55917/" target="_self"><em><span>第2话</span>我的英雄学院
+                            第二季 第2话 怒吼吧 体育祭</em></a></li>
+                        <li><a href="http://www.dilidili.wang/watch3/56112/" target="_self"><em><span>第3话</span>我的英雄学院
+                            第二季 第3话 大家全都个性十足 太棒了</em></a></li>
+                    </ul>
+                </div>
+                <div class="swiper-slide" style="width: 636px;">
+                    <ul class="clear">
+                        <li><a href="http://www.dilidili.wang/watch3/56269/" target="_self"><em><span>第4话</span>我的英雄学院
+                            第二季 第4话 策策策</em></a></li>
+                        <li><a href="http://www.dilidili.wang/watch3/56451/" target="_self"><em><span>第5话</span>我的英雄学院
+                            第二季 第5话 骑马战分出胜负</em></a></li>
+                    </ul>
+                </div>
+                <div class="swiper-slide" style="width: 636px;">
+                    <ul class="clear">
+                        <li><a href="http://www.dilidili.wang/watch3/56604/" target="_self"><em><span>第6话</span>我的英雄学院
+                            第二季 第6话 生来就拥有一切的男孩</em></a></li>
+                        <li><a href="http://www.dilidili.wang/watch3/56738/" target="_self"><em><span>第7话</span>我的英雄学院
+                            第二季 第7话 胜与败</em></a></li>
+                    </ul>
+                </div>
+                <div class="swiper-slide" style="width: 636px;">
+                    <ul class="clear">
+                        <li><a href="http://www.dilidili.wang/watch3/56876/" target="_self"><em><span>第8话</span>我的英雄学院
+                            第二季 第8话 奋斗吧!挑战者们</em></a></li>
+                        <li><a href="http://www.dilidili.wang/watch3/57429/" target="_self"><em><span>第9话</span>我的英雄学院
+                            第二季 第9话 爆豪VS丽日</em></a></li>
+                    </ul>
+                </div>
+                <div class="swiper-slide" style="width: 636px;">
+                    <ul class="clear">
+                        <li><a href="http://www.dilidili.wang/watch3/57842/" target="_self"><em><span>第10话</span>我的英雄学院
+                            第二季 第10话 轰焦冻:原点</em></a></li>
+                        <li><a href="http://www.dilidili.wang/watch3/58402/" target="_self"><em><span>第11话</span>我的英雄学院
+                            第二季 第11话 饭田君 Fight</em></a></li>
+                    </ul>
+                </div>
+                <div class="swiper-slide" style="width: 636px;">
+                    <ul class="clear">
+                        <li><a href="http://www.dilidili.wang/watch3/58834/" target="_self"><em><span>第12话</span>我的英雄学院
+                            第二季 第12话 轰VS爆豪</em></a></li>
+                        <li><a href="http://www.dilidili.wang/watch3/58952/" target="_self"><em><span>第13话</span>我的英雄学院
+                            第二季 第13话 起个名字大会</em></a></li>
+                    </ul>
+                </div>
+                <div class="swiper-slide" style="width: 636px;">
+                    <ul class="clear">
+                        <li><a href="http://www.dilidili.wang/watch3/59385/" target="_self"><em><span>第14话</span>我的英雄学院
+                            第二季 第14话 奇人!格兰特里诺现身</em></a></li>
+                        <li><a href="http://www.dilidili.wang/watch3/59476/" target="_self"><em><span>第15话</span>我的英雄学院
+                            第二季 第15话 绿谷和死柄木</em></a></li>
+                    </ul>
+                </div>
+                <div class="swiper-slide" style="width: 636px;">
+                    <ul class="clear">
+                        <li><a href="http://www.dilidili.wang/watch3/59632/" target="_self"><em><span>第16话</span>我的英雄学院
+                            第二季 第16话 英雄杀手斯坦因VS雄英学生</em></a></li>
+                        <li><a href="http://www.dilidili.wang/watch3/59723/" target="_self"><em><span>第17话</span>我的英雄学院
+                            第二季 第17话 了断</em></a></li>
+                    </ul>
+                </div>
+                <div class="swiper-slide" style="width: 636px;">
+                    <ul class="clear">
+                        <li><a href="http://www.dilidili.wang/watch3/59825/" target="_self"><em><span>第18话</span>我的英雄学院
+                            第二季 第18话 英雄杀手斯坦因事件余波</em></a></li>
+                        <li><a href="http://www.dilidili.wang/watch3/59912/" target="_self"><em><span>第19话</span>我的英雄学院
+                            第二季 第19话 各自的职场体验</em></a></li>
+                    </ul>
+                </div>
+                <div class="swiper-slide" style="width: 636px;">
+                    <ul class="clear">
+                        <li><a href="http://www.dilidili.wang/watch3/60012/" target="_self"><em><span>第20话</span>我的英雄学院
+                            第二季 第20话 知晓!!往昔之事</em></a></li>
+                        <li>undefined</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        </div>
+        <div class="swiper-button-next swiper-button-next4"></div>
+        <div class="swiper-button-prev swiper-button-prev4 swiper-button-disabled"></div>
+    </div>
+    <div class="time_con" style="display: none;">
+        <div class="stafflist">
+            <div class="staff"><p class="row">原作：堀越耕平</p>
+                <p class="row">监督：长崎健司</p>
+                <p class="row">系列构成·脚本：黑田洋介</p>
+                <p class="row">动画制作：BONES</p>
+                <p class="row">音乐：林友树</p></div>
+        </div>
+        <div class="cast"><p class="row">主要配音山下大辉，三宅健太，冈本信彦，佐仓绫音</p></div>
+        <div class="col-sm-6">
+    </div>
+</div>
+<div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+        <ul class="pagination">
+            <li class="paginate_button previous"
+                aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous">
+                <a href="javascript:;">Previous</a>
+            </li>
+            <li class="paginate_button next">
+                <a href="javascript:;">Next</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block css %}
+<link href="{% static 'movies/css/main.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block js %}
+<!-- jQuery -->
+<script src="/static/vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="{% static 'movies/js/tv.js' %}"></script>
+{% endblock %}
+

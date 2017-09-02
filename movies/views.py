@@ -1,5 +1,8 @@
 # -*- coding:utf8 -*-
+from django.shortcuts import get_object_or_404
 from django.views.generic.base import TemplateView
+
+from movies.models import Movies
 
 
 class TestView(TemplateView):
@@ -31,3 +34,14 @@ class MainView(TemplateView):
 
     def get_context_data(self, **kwargs):
         return super(MainView, self).get_context_data(**kwargs)
+
+
+class TvView(TemplateView):
+    template_name = 'movies/tv.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(TvView, self).get_context_data(**kwargs)
+        tvid = self.request.GET.get('v', '')
+        tvinfo = get_object_or_404(Movies, id=tvid)
+        context['tvinfo'] = tvinfo
+        return context
