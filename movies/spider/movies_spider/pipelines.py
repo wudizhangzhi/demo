@@ -118,7 +118,7 @@ class HandlerTvPipeline(object):
                 print('not in tv list', category)
                 return item
             title = items['title'][0]
-            logging.info(u'TV: %r' % title)
+            logging.info(title)
 
             sub_title_list = items['sub_title']
             seq_list = items['seq']
