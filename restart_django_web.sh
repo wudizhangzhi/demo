@@ -8,9 +8,9 @@ do
   then
        pid=$child
        
-       echo '更新代码'
-       cd demo && git pull origin master
- 
+       echo '更新代码并更新数据库'
+       cd demo && git pull origin master && python manange.py migrate moivies
+
        echo '重启uwsgi'
        kill -HUP $pid
        

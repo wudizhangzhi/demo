@@ -23,9 +23,10 @@ class youku_Spider(CommonSpider):
     name = "movies_spider"
     allowed_domains = ["list.youku.com", "v.youku.com"]
     start_urls = [
+        "http://list.youku.com/category/show/c_97.html",
         "http://list.youku.com/category/show/c_96.html",
         "http://list.youku.com/category/show/c_100.html",
-        "http://list.youku.com/category/show/c_97.html",
+
     ]
     rules = [
         Rule(sle(allow=("list.youku.com/category/show/c_[10967]+_?[_a-z0-9]*\.html")), callback='parse_1', follow=True),
