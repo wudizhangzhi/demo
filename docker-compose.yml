@@ -1,0 +1,29 @@
+VERSION: 3.0 
+services:
+    web:
+        build: ./demon
+        command: bash -c "python manage.py makemigrations &&
+                          python manage.py migrate &&
+                          python manage.py collectstatic &&
+                          uwsgi --ini uwsgi.conf"
+        ports:
+            - "8000:8000"
+        volumes:
+            - /home
+        links:
+            - db
+            - redis
+    
+    db:
+        images: mysql:5.7.19 
+        volumes:
+            - ./db:/var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=password
+            - MYSQL_DATABASE=demon
+
+    redis:
+        restart: always
+        images: redis:lastest
+        volumes:
+            - /data

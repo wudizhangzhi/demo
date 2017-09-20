@@ -2,4 +2,6 @@ django==1.11.4
 django-extensions==1.9.0
 django-widget-tweaks==1.4.1
 djangorestframework==3.6.4
-scrapy
+scrapy==1.4.0
+uwsgi
+MySQL-python
