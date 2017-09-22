@@ -38,8 +38,8 @@ services:
     nginx:
         restart: always
         image: nginx:1.13.5
-        expose:
-            - "8000"
+        ports:
+            - "8000:8000"
         volumes_from:
             - web
         links:
