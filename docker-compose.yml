@@ -24,11 +24,11 @@ services:
             - ./web:/main/web
             - /var/log/demon/:/log
             - /tmp
+            - ./nginx:/etc/nginx/sites-enabled
         links:
             - mysql:mysql 
             - redis:redis
-            - nginx:nginx
-    
+
     redis:
         restart: always
         image: redis:latest
@@ -40,6 +40,6 @@ services:
         image: nginx:1.13.5
         volumes_from:
             - web
-        link:
+        links:
             - web:web
 
