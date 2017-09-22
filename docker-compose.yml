@@ -1,5 +1,13 @@
 version: "2" 
 services:
+    mysql:
+        image: mysql:5.7.19
+        volumes:
+            - /var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=password
+            - MYSQL_DATABASE=demon
+
     web:
         build: ./web/
         command: bash -c "python manage.py makemigrations &&
@@ -12,16 +20,9 @@ services:
             - /main
             - /log
         links:
-            - mysql 
-            - redis
+            - mysql:mysql 
+            - redis:redis
     
-    mysql:
-        image: mysql:5.7.19 
-        volumes:
-            - /var/lib/mysql
-        environment:
-            - MYSQL_ROOT_PASSWORD=password
-
     redis:
         restart: always
         image: redis:latest
