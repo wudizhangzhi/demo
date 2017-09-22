@@ -6,4 +6,4 @@ scrapy==1.4.0
 uwsgi
 mysqlclient
 supervisor
-scrapy
+scrapy==1.4.0
