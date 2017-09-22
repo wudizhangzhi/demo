@@ -9,22 +9,21 @@ services:
         ports:
             - "8000:8000"
         volumes:
-            - /home
+            - /main
             - /log
         links:
-            - db
+            - mysql 
             - redis
     
-    db:
+    mysql:
         image: mysql:5.7.19 
         volumes:
-            - ./db:/var/lib/mysql
+            - /var/lib/mysql
         environment:
             - MYSQL_ROOT_PASSWORD=password
-            - MYSQL_DATABASE=demon
 
     redis:
         restart: always
-        image: redis:lastest
+        image: redis:latest
         volumes:
             - /data
