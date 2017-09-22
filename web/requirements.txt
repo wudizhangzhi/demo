@@ -5,5 +5,5 @@ djangorestframework==3.6.4
 scrapy==1.4.0
 uwsgi
 mysqlclient
-supervisor
+#supervisor
 scrapy==1.4.0
