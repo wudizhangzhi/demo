@@ -4,6 +4,7 @@ services:
         image: mysql:5.7.19
         volumes:
             - /var/lib/mysql
+            - ./db:/etc/mysql/conf.d
         environment:
             - MYSQL_ROOT_PASSWORD=password
             - MYSQL_DATABASE=demon
@@ -13,19 +14,32 @@ services:
         command: bash -c "python manage.py makemigrations &&
                           python manage.py migrate &&
                           python manage.py collectstatic -c <<< yes &&
-                          supervisor -n -c supervisord.conf"
-        ports:
-            - "8000:8000"
+                          supervisord -n -c supervisord.conf"
+        expose:
+            - "8001"
+        depends_on:
+            - mysql
+            - nginx
         volumes:
-            - /main
+            - ./web:/main/web
             - /var/log/demon/:/log
             - /tmp
         links:
             - mysql:mysql 
             - redis:redis
+            - nginx:nginx
     
     redis:
         restart: always
         image: redis:latest
         volumes:
             - /data
+
+    nginx:
+        restart: always
+        image: nginx:1.13.5
+        volumes_from:
+            - web
+        link:
+            - web:web
+
