@@ -12,7 +12,7 @@ services:
         build: ./web/
         command: bash -c "python manage.py makemigrations &&
                           python manage.py migrate &&
-                          python manage.py collectstatic -c &&
+                          python manage.py collectstatic -c <<< yes &&
                           supervisor -n -c supervisord.conf"
         ports:
             - "8000:8000"
