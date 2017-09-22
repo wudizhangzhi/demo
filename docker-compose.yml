@@ -19,12 +19,12 @@ services:
             - "8001"
         depends_on:
             - mysql
-            - nginx
         volumes:
             - ./web:/main/web
             - /var/log/demon/:/log
             - /tmp
-            - ./nginx:/etc/nginx/sites-enabled
+            - ./nginx/site-enabled:/etc/nginx/sites-enabled
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
         links:
             - mysql:mysql 
             - redis:redis
@@ -38,6 +38,8 @@ services:
     nginx:
         restart: always
         image: nginx:1.13.5
+        expose:
+            - "8000"
         volumes_from:
             - web
         links:
