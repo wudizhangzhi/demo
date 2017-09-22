@@ -18,7 +18,7 @@ services:
             - "8000:8000"
         volumes:
             - /main
-            - /log
+            - /var/log/demon/:/log
             - /tmp
         links:
             - mysql:mysql 
