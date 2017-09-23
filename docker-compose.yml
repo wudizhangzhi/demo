@@ -5,10 +5,7 @@ services:
         volumes:
             - /var/lib/mysql
             - ./db:/etc/mysql/conf.d
-        environment:
-            - MYSQL_ROOT_PASSWORD=password
-            - MYSQL_DATABASE=demon
-            - MYSQL_CONTAINER_NAME=mysql
+        env_file: .env
         ports:
             - "3306"
 
@@ -18,6 +15,7 @@ services:
                           python manage.py migrate &&
                           python manage.py collectstatic -c <<< yes &&
                           supervisord -n -c supervisord.conf"
+        env_file: .env
         expose:
             - "8001"
         depends_on:
