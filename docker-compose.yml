@@ -8,6 +8,7 @@ services:
         environment:
             - MYSQL_ROOT_PASSWORD=password
             - MYSQL_DATABASE=demon
+            - MYSQL_CONTAINER_NAME=mysql
         ports:
             - "3306"
 
