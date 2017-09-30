@@ -56,14 +56,10 @@ $(function() {
     var refresh_html = function(items){
         $('#seq-list').empty();
         for(var i=0;i < items.length - 1; i=i+2){
-            var html =  '<div class="swiper-slide swiper-slide-active" style="width: 636px;">'+
-                    '<ul class="clear">'+
-                        '<li><a href="/movies/play/?v=' + items[i].url + '" target="_self">'+
+            var html = '<li><a href="/movies/play/?v=' + items[i].url + '" target="_self">'+
                         '<em><span>' + items[i].seq + '</span>' + items[i].title + '</em></a></li>'+
                         '<li><a href="/movies/play/?v=' + items[i].url + '" target="_self">'+
-                        '<em><span>' + items[i+1].seq + '</span>' + items[i+1].title + '</em></a></li>'+
-                    '</ul>'+
-                '</div>'+
+                        '<em><span>' + items[i+1].seq + '</span>' + items[i+1].title + '</em></a></li>'
             $('#seq-list').append(html)
         };
         if(items.length==0){
