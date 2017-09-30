@@ -56,7 +56,7 @@ $(function() {
     var refresh_html = function(items){
         $('#seq-list').empty();
         for(var i=0;i < items.length - 1; i=i+2){
-            html =  '<div class="swiper-slide swiper-slide-active" style="width: 636px;">'+
+            var html =  '<div class="swiper-slide swiper-slide-active" style="width: 636px;">'+
                     '<ul class="clear">'+
                         '<li><a href="/movies/play/?v=' + items[i].url + '" target="_self">'+
                         '<em><span>' + items[i].seq + '</span>' + items[i].title + '</em></a></li>'+
